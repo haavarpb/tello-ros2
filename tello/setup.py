@@ -1,4 +1,6 @@
 from setuptools import setup
+import os
+from glob import glob
 
 setup(
     name='tello',
@@ -7,6 +9,7 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/tello']),
         ('share/tello', ['package.xml', 'resource/ost.txt', 'resource/ost.yaml']),
+        (os.path.join("share", "tello", "launch"), glob(os.path.join("launch", "*.launch.py")))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
