@@ -9,7 +9,8 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/tello']),
         ('share/tello', ['package.xml', 'resource/ost.txt', 'resource/ost.yaml']),
-        (os.path.join("share", "tello", "launch"), glob(os.path.join("launch", "*.launch.py")))
+        (os.path.join("share", "tello", "launch"), glob(os.path.join("launch", "*.launch.py"))),
+        (os.path.join("share", "tello", "config"), glob(os.path.join("config", "*")))
     ],
     install_requires=['setuptools'],
     zip_safe=True,

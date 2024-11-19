@@ -1,6 +1,8 @@
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+import os
 
 def generate_launch_description():
     nodes = [
@@ -51,7 +53,7 @@ def generate_launch_description():
             namespace='/',
             name='rviz2',
             respawn=True,
-            arguments=['-d', '/home/tentone/Git/tello-slam/workspace/src/rviz.rviz']
+            arguments=['-d', FindPackageShare('tello'), 'config', 'tello.rviz']
         ),
     ]
 
