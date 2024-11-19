@@ -2,7 +2,7 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-import os
+from launch.substitutions import PathJoinSubstitution
 
 def generate_launch_description():
     nodes = [
@@ -17,32 +17,13 @@ def generate_launch_description():
                 {'connect_timeout': 10.0},
                 {'tello_ip': '192.168.10.1'},
                 {'tf_base': 'map'},
-                {'tf_drone': 'drone'}
+                {'tf_drone': 'drone'},
+                {"tf_pub": True}
             ],
             remappings=[
                 ('/image_raw', '/camera')
             ],
             respawn=True
-        ),
-
-        # Tello control node
-        Node(
-            package='tello_control',
-            executable='tello_control',
-            namespace='/',
-            name='control',
-            output='screen',
-            respawn=False
-        ),
-
-        # RQT topic debug tool
-        Node(
-            package='rqt_gui',
-            executable='rqt_gui',
-            output='screen',
-            namespace='/',
-            name='rqt',
-            respawn=False
         ),
 
         # RViz data visualization tool
@@ -53,9 +34,7 @@ def generate_launch_description():
             namespace='/',
             name='rviz2',
             respawn=True,
-            arguments=['-d', FindPackageShare('tello'), 'config', 'tello.rviz']
+            arguments=['-d', PathJoinSubstitution([FindPackageShare('tello'), 'config', 'tello.rviz'])]
         ),
     ]
-
-
     return LaunchDescription(nodes)
