@@ -266,7 +266,7 @@ class TelloNode():
                 frame = frame_read.frame
 
                 # Publish opencv frame using CV bridge
-                msg = self.bridge.cv2_to_imgmsg(numpy.array(frame), 'bgr8')
+                msg = self.bridge.cv2_to_imgmsg(cv2.cvtColor(numpy.array(frame), cv2.COLOR_RGB2BGR), 'bgr8')
                 msg.header.frame_id = self.tf_drone
                 self.pub_image_raw.publish(msg)
 
