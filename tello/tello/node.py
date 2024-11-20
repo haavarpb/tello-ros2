@@ -348,7 +348,6 @@ def main(args=None):
 
     rclpy.spin(node)
 
-    drone.cb_shutdown()
     node.destroy_node()
     rclpy.shutdown()
 
